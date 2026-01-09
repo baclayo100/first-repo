@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPT Final Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showSection('accounts')">IPT Final</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="#" onclick="showSection('accounts')">Accounts</a>
+                <a class="nav-link" href="#" onclick="showSection('employees')">Employees</a>
+                <a class="nav-link" href="#" onclick="showSection('departments')">Departments</a>
+                <a class="nav-link" href="#" onclick="showSection('requests')">Requests</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Global Alert Placeholder -->
+    <div id="global-alert-placeholder" class="container alert-placeholder"></div>
+
+    <div class="container">
+        <!-- Accounts Section -->
+        <div id="accounts-section" class="section">
+            <div class="card">
+                <div class="card-header"><h5>ACCOUNTS</h5></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="accounts-table-body">
+                                <!-- Accounts will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-primary" onclick="showAccountForm(null)">Add Account</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Add/Edit Form -->
+        <div id="account-form-section" class="section hidden">
+            <div class="card">
+                <div class="card-header"><h5 id="account-form-title">ADD ACCOUNT</h5></div>
+                <div class="card-body">
+                    <div class="alert alert-danger hidden" id="account-form-error"></div>
+                    <input type="hidden" id="account-id">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label>Title</label>
+                            <select class="form-control" id="account-title">
+                                <option>Mr</option>
+                                <option>Ms</option>
+                                <option>Mrs</option>
+                                <option>Dr</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" id="account-firstName">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" id="account-lastName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" id="account-email">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Role</label>
+                            <select class="form-control" id="account-role">
+                                <option>Admin</option>
+                                <option>User</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Status</label>
+                            <select class="form-control" id="account-status">
+                                <option>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="saveAccount()">Save</button>
+                        <button class="btn btn-secondary" onclick="showSection('accounts')">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Employees Section -->
+        <div id="employees-section" class="section hidden">
+            <div class="card">
+                <div class="card-header"><h5>EMPLOYEES</h5></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Employee ID</th>
+                                    <th>Account</th>
+                                    <th>Position</th>
+                                    <th>Department</th>
+                                    <th>Hire Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employees-table-body">
+                                <!-- Employees will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-primary" onclick="showEmployeeForm(null)">Add Employee</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Employee Add/Edit Form -->
+        <div id="employee-form-section" class="section hidden">
+            <div class="card">
+                <div class="card-header"><h5 id="employee-form-title">ADD EMPLOYEE</h5></div>
+                <div class="card-body">
+                    <div class="alert alert-danger hidden" id="employee-form-error"></div>
+                    <div class="form-group">
+                        <label>Employee ID</label>
+                        <input type="text" class="form-control" id="employee-id" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Account</label>
+                        <select class="form-control" id="employee-user">
+                            <!-- Accounts will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Position</label>
+                        <input type="text" class="form-control" id="employee-position">
+                    </div>
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select class="form-control" id="employee-department">
+                            <!-- Departments will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Hire Date</label>
+                        <input type="date" class="form-control" id="employee-hire-date">
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control" id="employee-status">
+                            <option>Active</option>
+                            <option>Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="saveEmployee()">Save</button>
+                        <button class="btn btn-secondary" onclick="showSection('employees')">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Departments Section -->
+        <div id="departments-section" class="section hidden">
+            <div class="card">
+                <div class="card-header"><h5>DEPARTMENTS</h5></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Employee Count</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="departments-table-body">
+                                <!-- Departments will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-primary" onclick="showDepartmentForm(null)">Add Department</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Department Add/Edit Form -->
+        <div id="department-form-section" class="section hidden">
+            <div class="card">
+                <div class="card-header"><h5 id="department-form-title">ADD DEPARTMENT</h5></div>
+                <div class="card-body">
+                    <div class="alert alert-danger hidden" id="department-form-error"></div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" id="department-name">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" id="department-description">
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="saveDepartment()">Save</button>
+                        <button class="btn btn-secondary" onclick="showSection('departments')">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requests Section -->
+        <div id="requests-section" class="section hidden">
+            <div class="card">
+                <div class="card-header"><h5>REQUESTS</h5></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Employee</th>
+                                    <th>Items</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="requests-table-body">
+                                <!-- Requests will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-primary" onclick="showRequestForm(null)">Add Request</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Request Add/Edit Form -->
+        <div id="request-form-section" class="section hidden">
+            <div class="card">
+                <div class="card-header"><h5 id="request-form-title">ADD REQUEST</h5></div>
+                <div class="card-body">
+                    <div class="alert alert-danger hidden" id="request-form-error"></div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select class="form-control" id="request-type">
+                            <option>Equipment</option>
+                            <option>Leave</option>
+                            <option>Resources</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Employee</label>
+                        <select class="form-control" id="request-employee">
+                            <!-- Employees will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Items</label>
+                        <div id="request-items">
+                            <!-- Request items will be populated by JavaScript -->
+                        </div>
+                        <button class="btn btn-secondary" onclick="addRequestItem()">Add Item</button>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="saveRequest()">Save</button>
+                        <button class="btn btn-secondary" onclick="showSection('requests')">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
